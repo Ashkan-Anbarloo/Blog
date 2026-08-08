@@ -1,0 +1,14 @@
+{% extends "parent/base.html" %}
+{% block title %}Page Account{% endblock title %}
+{% block content %}
+
+{% if user.account.photo %}
+    <img src="{{ user.account.photo.url }}" alt="عکس پروفایل">
+{% else %}
+    NO have a photo
+{% endif %}
+
+<p>name : {{user.username}}</p>
+<p>job : {{user.account.job}}</p>
+<p>birth : {{user.account.date_of_birth}}</p>
+{% endblock content %}

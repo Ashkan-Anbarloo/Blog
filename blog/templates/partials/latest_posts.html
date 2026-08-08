@@ -1,0 +1,7 @@
+{% load blog_tags %}
+<div>
+    <h2>latest posts</h2>
+    {% for post in l_posts %}
+        <a href='{{post.get_absolute_url}}'>{{post.title | censor}}</a>
+    {% endfor %}
+</div>

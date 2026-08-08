@@ -1,0 +1,37 @@
+{% extends "parent/base.html" %}
+{% load blog_tags %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+<div>
+{% if random_post and random_post.images.first.image_file %}
+    <img src="{{ random_post.images.first.image_file.url }}" alt="{{ random_post.title }}">
+    <a href='{% url "blog:post_detail" random_post.id%}'>{{random_post.title}}</a>
+{% else %}
+    عکسی برای نمایش وجود ندارد
+{% endif %}
+</div>
+
+<h1>Statistics</h1>
+<p>post Count : {% total_posts %}</p>
+<p>comment Count : {% total_comments %}</p>
+<p>history lasting post : {% last %}</p>
+
+{% latest_posts 3 %}
+
+<h2>popular_posts</h2>
+{% most_popular_posts 3 as pop_posts %}
+{% for post in pop_posts %}
+    <a href='{{post.get_absolute_url}}'>{{post.title | censor}} with : {{post.comment_count}} comments</a>
+    <br>
+{% endfor %}
+<br><br>
+<h2>most reading time</h2>
+{% m_reading %}
+<br><br>
+<h2>low reading time</h2>
+{% l_reading %}
+<br><br>
+<h2>Best User</h2>
+{% best_user %}
+{% endblock content %}
